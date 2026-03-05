@@ -18,10 +18,10 @@ class ChatRequest(BaseModel):
         description="Previous conversation messages for context"
     )
     max_new_tokens: Optional[int] = Field(
-        default=100,
+        default=None,
         ge=1,
         le=200,
-        description="Maximum number of tokens to generate (default: 100 for concise answers)"
+        description="Maximum tokens to generate (auto-set based on turn)"
     )
 
 
@@ -30,7 +30,11 @@ class ChatResponse(BaseModel):
     response: str = Field(..., description="Model's response")
     disease_detected: Optional[str] = Field(
         default=None,
-        description="Detected disease: 'blast', 'blight', 'brownspot', or 'unknown'"
+        description="Detected disease: 'blast', 'blight', 'brownspot', or None"
+    )
+    context_status: Optional[str] = Field(
+        default=None,
+        description="Context window status: 'ok', 'compacted', or 'near_limit'"
     )
 
 

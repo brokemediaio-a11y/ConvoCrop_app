@@ -6,7 +6,8 @@ import Image from 'next/image'
 import GlassSurface from '@/components/GlassSurface'
 import SplitText from '@/components/SplitText'
 import FloatingLines from '@/components/FloatingLines'
-import PlantViewer from '@/components/PlantViewer'
+import AnimatedChat from '@/components/AnimatedChat'
+import AboutSection from '@/components/AboutSection'
 
 export default function Home() {
   const router = useRouter()
@@ -167,41 +168,69 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right hero 3D plant — explicit sizing so it actually renders */}
-            <div
-              className="hidden lg:flex flex-1 items-center justify-center"
-              style={{ minWidth: '400px', minHeight: '500px', height: '560px' }}
-            >
-              <PlantViewer />
-            </div>
-          </div>
+            {/* Right hero animated chat */}
+            <div className="hidden lg:flex flex-1 flex-col items-center justify-center">
+              <div
+                className="flex items-center justify-center"
+                style={{ minWidth: '400px', minHeight: '500px', height: '560px' }}
+              >
+                <AnimatedChat />
+              </div>
+              
+              {/* Logos - reduced by 3x and placed under chat */}
+              <div className="flex items-center justify-center gap-3 md:gap-4 mt-4">
+                <div className="relative w-11 h-11 md:w-14 md:h-14">
+                  <Image
+                    src="/logos/bahria-university-logo.png"
+                    alt="Bahria University"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
 
-          {/* Logos */}
-          <div className="flex items-center justify-start gap-8 md:gap-12 mt-12 pl-4 md:pl-12 lg:pl-16">
-            <div className="relative w-32 h-32 md:w-40 md:h-40">
-              <Image
-                src="/logos/bahria-university-logo.png"
-                alt="Bahria University"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
+                <div className="text-xs md:text-xl font-light text-white animate-rotate-x">×</div>
 
-            <div className="text-4xl md:text-6xl font-light text-white animate-rotate-x">×</div>
-
-            <div className="relative w-32 h-32 md:w-40 md:h-40">
-              <Image
-                src="/logos/image-removebg-preview.png"
-                alt="NCAI"
-                fill
-                className="object-contain"
-                priority
-              />
+                <div className="relative w-11 h-11 md:w-14 md:h-14">
+                  <Image
+                    src="/logos/image-removebg-preview.png"
+                    alt="NCAI"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* About Section */}
+      <AboutSection
+        teamMembers={[
+          {
+            name: 'Saad Hassan',
+            image: '/2faa39a1-76f0-403f-8896-742ac9c4a5ab.jpg',
+            linkedin: 'https://linkedin.com/in/saad-hassan',
+          },
+          {
+            name: 'Qurat ul ain Fatima',
+            image: '/a9761351-ac7e-4c32-9a7c-14fddaabfce2.jpg',
+            linkedin: 'https://linkedin.com/in/qurat-ul-ain-fatima',
+          },
+          {
+            name: 'Anwar Iqbal Sanjrani',
+            image: '/1754662920733.jpg',
+            linkedin: 'https://linkedin.com/in/anwar-iqbal-sanjrani',
+          },
+          {
+            name: 'Dr. Asfand e yar',
+            image: '/images (2).jpg',
+            linkedin: 'https://linkedin.com/in/dr-asfand-e-yar',
+          },
+        ]}
+      />
     </div>
   )
 }
