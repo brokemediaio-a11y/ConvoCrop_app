@@ -1,0 +1,20 @@
+# Python
+backend/venv/
+backend/__pycache__/
+*.pyc
+
+# Model checkpoints
+backend/checkpoints/
+backend/models/
+
+# Node
+frontend/node_modules/
+frontend/.next/
+
+# Env files
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
