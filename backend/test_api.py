@@ -28,7 +28,7 @@ def test_chat_endpoint(image_path: str, question: str = "What disease does this 
     payload = {
         "image": image_base64,
         "question": question,
-        "max_new_tokens": 200
+        "max_new_tokens": 64
     }
     
     # Send request

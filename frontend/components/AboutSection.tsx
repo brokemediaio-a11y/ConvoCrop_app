@@ -41,7 +41,7 @@ export default function AboutSection({ teamMembers = [] }: AboutSectionProps) {
   return (
     <section className="w-full py-16 md:py-24 px-4 md:px-8 relative">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-6xl font-extrabold text-[#dedede] text-center mb-12 md:mb-16">
+        <h2 className="text-4xl md:text-6xl font-extrabold text-[#252525] text-center mb-12 md:mb-16">
           About Us
         </h2>
 
@@ -66,7 +66,7 @@ export default function AboutSection({ teamMembers = [] }: AboutSectionProps) {
         {/* Team Section */}
         {teamMembers.length > 0 && (
           <div className="mt-16 md:mt-24">
-            <h3 className="text-3xl md:text-4xl font-extrabold text-[#dedede] text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-extrabold text-[#252525] text-center mb-12">
               Our Team
             </h3>
             <TeamCarousel members={teamMembers} autoPlay={true} autoPlayInterval={4000} />

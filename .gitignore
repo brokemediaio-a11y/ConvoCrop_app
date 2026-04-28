@@ -18,3 +18,8 @@ frontend/.next/
 # OS
 .DS_Store
 Thumbs.db
+
+*.safetensors
+*.zip
+backend/model/checkpoints/
+model_finetuning/

@@ -18,55 +18,16 @@ interface TeamCarouselProps {
 
 export default function TeamCarousel({
   members,
-  autoPlay = true,
-  autoPlayInterval = 3000,
 }: TeamCarouselProps) {
-  const carouselRef = useRef<HTMLDivElement>(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
-
-  useEffect(() => {
-    if (!autoPlay || members.length === 0) return
-
-    intervalRef.current = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % members.length)
-    }, autoPlayInterval)
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-      }
-    }
-  }, [autoPlay, autoPlayInterval, members.length])
-
-  useEffect(() => {
-    if (!carouselRef.current) return
-
-    const items = carouselRef.current.querySelectorAll('.team-member-item')
-    items.forEach((item, index) => {
-      const isActive = index === currentIndex
-      gsap.to(item, {
-        scale: isActive ? 1 : 0.85,
-        opacity: isActive ? 1 : 0.5,
-        duration: 0.5,
-        ease: 'power2.out',
-      })
-    })
-  }, [currentIndex])
-
   if (members.length === 0) return null
 
   return (
     <div className="w-full py-8">
-      <div
-        ref={carouselRef}
-        className="flex items-center justify-center gap-8 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-      >
+      <div className="flex items-center justify-center gap-8 flex-wrap">
         {members.map((member, index) => (
           <div
             key={index}
-            className="team-member-item flex flex-col items-center gap-4 cursor-pointer transition-all"
-            onClick={() => setCurrentIndex(index)}
+            className="flex flex-col items-center gap-4"
           >
             <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#00a71b]/50 hover:border-[#00a71b] transition-colors">
               <Image
@@ -77,15 +38,14 @@ export default function TeamCarousel({
               />
             </div>
             <div className="text-center">
-              <h3 className="text-lg md:text-xl font-bold text-[#dedede] mb-2">
+              <h3 className="text-lg md:text-xl font-bold text-[#252525] mb-2">
                 {member.name}
               </h3>
               <a
                 href={member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#1a1a1a] border border-[#00a71b]/30 hover:border-[#00a71b] hover:bg-[#00a71b]/10 transition-colors"
-                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#f0f0f0] border border-[#00a71b]/30 hover:border-[#00a71b] hover:bg-[#00a71b]/10 transition-colors"
               >
                 <svg
                   className="w-5 h-5 text-[#00a71b]"
@@ -97,22 +57,6 @@ export default function TeamCarousel({
               </a>
             </div>
           </div>
-        ))}
-      </div>
-      
-      {/* Navigation dots */}
-      <div className="flex justify-center gap-2 mt-6">
-        {members.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              index === currentIndex
-                ? 'bg-[#00a71b] w-8'
-                : 'bg-[#00a71b]/30 hover:bg-[#00a71b]/50'
-            }`}
-            aria-label={`Go to team member ${index + 1}`}
-          />
         ))}
       </div>
     </div>

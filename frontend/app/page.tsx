@@ -6,8 +6,9 @@ import Image from 'next/image'
 import GlassSurface from '@/components/GlassSurface'
 import SplitText from '@/components/SplitText'
 import FloatingLines from '@/components/FloatingLines'
-import AnimatedChat from '@/components/AnimatedChat'
+import PlantViewer from '@/components/PlantViewer'
 import AboutSection from '@/components/AboutSection'
+import { CONVOCROP_LOGO_SRC } from '@/lib/assets'
 
 export default function Home() {
   const router = useRouter()
@@ -15,7 +16,7 @@ export default function Home() {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Background Effect */}
-      <div className="fixed inset-0 w-full h-full z-0 bg-black">
+      <div className="fixed inset-0 w-full h-full z-0 bg-[#ebebeb]">
         <FloatingLines
           enabledWaves={['top']}
           lineCount={5}
@@ -25,14 +26,19 @@ export default function Home() {
           interactive
           parallax
           linesGradient={['#a8ffbf', '#00a71b', '#0b5b2a']}
-          mixBlendMode="screen"
+          mixBlendMode="multiply"
         />
       </div>
 
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col px-4 py-6 md:py-10">
+        {/* 3D Plant - covers entire hero section, behind text */}
+        <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <PlantViewer />
+        </div>
+
         {/* Header */}
-        <header className="w-full flex justify-center">
+        <header className="w-full flex justify-center relative z-10">
           <GlassSurface
             width="100%"
             height={64}
@@ -55,20 +61,47 @@ export default function Home() {
           >
             <div className="relative w-full flex items-center">
               {/* Logo - pinned to far left */}
-              <div className="flex items-center gap-3 md:gap-4">
+              <div className="-ml-2 md:-ml-4 lg:-ml-6 flex items-center gap-2 md:gap-3">
                 <div className="relative w-32 h-8 md:w-40 md:h-10">
                   <Image
-                    src="/logos/convcrop logo.png"
+                    src={CONVOCROP_LOGO_SRC}
                     alt="Convo Crop logo"
                     fill
                     className="object-contain"
                     priority
                   />
                 </div>
+
+                {/* Separator + Partner logos */}
+                <div className="hidden md:flex items-center gap-2">
+                  <div className="h-8 w-px bg-[#252525]/30" />
+
+                  <div className="relative w-8 h-8 md:w-9 md:h-9">
+                    <Image
+                      src="/logos/bahria-university-logo.png"
+                      alt="Bahria University"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  </div>
+
+                  <div className="text-sm md:text-base font-light text-[#252525]">+</div>
+
+                  <div className="relative w-9 h-9 md:w-10 md:h-10">
+                    <Image
+                      src="/logos/image-removebg-preview.png"
+                      alt="NCAI"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Centered navigation */}
-              <nav className="absolute inset-x-0 flex items-center justify-center gap-4 md:gap-8 text-sm md:text-base font-medium text-[#dedede]">
+              <nav className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center gap-4 md:gap-8 text-sm md:text-base font-medium text-[#252525]">
                 <button
                   type="button"
                   onClick={() => router.push('/')}
@@ -117,14 +150,14 @@ export default function Home() {
         </header>
 
         {/* Main Content */}
-        <div className="flex flex-col flex-1 justify-center max-w-7xl mx-auto w-full">
+        <div className="flex flex-col flex-1 justify-center max-w-7xl mx-auto w-full relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-4 w-full">
             {/* Left hero text */}
             <div className="flex-1 max-w-2xl flex flex-col items-start pl-4 md:pl-12 lg:pl-16">
               <SplitText
-                text="Convo Crop"
+                text="Convo-Crop"
                 tag="h1"
-                className="text-6xl md:text-8xl font-extrabold text-[#dedede] drop-shadow-light"
+                className="text-6xl md:text-8xl font-extrabold text-[#252525] drop-shadow-light"
                 delay={50}
                 duration={1.25}
                 ease="power3.out"
@@ -136,13 +169,10 @@ export default function Home() {
                 textAlign="left"
               />
 
-              <p className="mt-6 max-w-xl text-sm md:text-base text-[#dedede] opacity-80">
-                an intelligent conversational assistant designed to help farmers detect and diagnose
-                crop diseases at an early stage. By simply sharing images, farmers receive instant,
-                AI-powered insights about potential issues, treatment recommendations, and preventive
-                measures. We replace the need for constant field visits by agronomists, making
-                expert-level crop analysis accessible anytime, anywhere empowering farmers to protect
-                their yield, reduce losses, and make informed decisions with confidence.
+              <p className="mt-6 max-w-xl text-sm md:text-base text-[#252525] opacity-80 text-justify">
+                An AI-powered assistant that helps farmers detect crop diseases early using images.
+                Get instant diagnosis, treatment advice, and preventive measures anytime. Empowering
+                smarter decisions, higher yields, and reduced losses.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -153,7 +183,7 @@ export default function Home() {
                   onClick={() => router.push('/chat')}
                   className="cursor-pointer hover:opacity-90 transition-opacity"
                 >
-                  <span className="text-[#dedede] font-medium text-lg">Get Started</span>
+                  <span className="text-[#252525] font-medium text-lg">Get Started</span>
                 </GlassSurface>
 
                 <GlassSurface
@@ -163,45 +193,11 @@ export default function Home() {
                   onClick={() => router.push('/contact')}
                   className="cursor-pointer hover:opacity-90 transition-opacity"
                 >
-                  <span className="text-[#dedede] font-medium text-lg">Contact us</span>
+                  <span className="text-[#252525] font-medium text-lg">Contact us</span>
                 </GlassSurface>
               </div>
             </div>
 
-            {/* Right hero animated chat */}
-            <div className="hidden lg:flex flex-1 flex-col items-center justify-center">
-              <div
-                className="flex items-center justify-center"
-                style={{ minWidth: '400px', minHeight: '500px', height: '560px' }}
-              >
-                <AnimatedChat />
-              </div>
-              
-              {/* Logos - reduced by 3x and placed under chat */}
-              <div className="flex items-center justify-center gap-3 md:gap-4 mt-4">
-                <div className="relative w-11 h-11 md:w-14 md:h-14">
-                  <Image
-                    src="/logos/bahria-university-logo.png"
-                    alt="Bahria University"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-
-                <div className="text-xs md:text-xl font-light text-white animate-rotate-x">×</div>
-
-                <div className="relative w-11 h-11 md:w-14 md:h-14">
-                  <Image
-                    src="/logos/image-removebg-preview.png"
-                    alt="NCAI"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

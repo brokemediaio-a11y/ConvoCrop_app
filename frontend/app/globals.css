@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: #212121;
-  --text-color: #dedede;
+  --bg-color: #ebebeb;
+  --text-color: #252525;
   --accent-color: #00a71b;
 }
 
@@ -35,7 +35,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #d4d4d4;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -63,5 +63,5 @@ body {
 
 /* Light drop shadow for headings */
 .drop-shadow-light {
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.05);
 }
